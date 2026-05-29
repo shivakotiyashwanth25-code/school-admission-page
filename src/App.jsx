@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { images } from "./assets/imageUrls";
+import GoogleAuthButton from "./components/GoogleAuthButton";
 
 const navLinks = ["Home", "Programs", "About", "Gallery", "Contact"];
 
@@ -141,6 +142,7 @@ function Navbar({ darkMode, setDarkMode }) {
         </div>
 
         <div className="hidden items-center gap-3 lg:flex">
+          <GoogleAuthButton />
           <button
             onClick={() => setDarkMode((value) => !value)}
             className="grid size-11 place-items-center rounded-full bg-slate-100 text-slate-700 transition hover:scale-105 dark:bg-slate-800 dark:text-slate-100"
@@ -185,6 +187,9 @@ function Navbar({ darkMode, setDarkMode }) {
             >
               {darkMode ? "Light Mode" : "Dark Mode"}
             </button>
+            <div className="mt-3 px-1">
+              <GoogleAuthButton compact />
+            </div>
           </div>
         </div>
       )}
