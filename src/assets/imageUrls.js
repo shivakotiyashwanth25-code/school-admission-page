@@ -4,10 +4,10 @@ export const images = {
   campus:
     "https://images.unsplash.com/photo-1604881991720-f91add269bed?auto=format&fit=crop&w=1100&q=85",
   gallery: [
-    "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80",
-    "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=900&q=80",
-    "https://images.unsplash.com/photo-1607453998774-d533f65dac99?auto=format&fit=crop&w=900&q=80",
-    "https://images.unsplash.com/photo-1544776193-352d25ca82cd?auto=format&fit=crop&w=900&q=80"
+    "https://source.unsplash.com/900x700/?school,annual-day,stage,children,performance",
+    "https://source.unsplash.com/900x700/?children,sports-day,school,race",
+    "https://source.unsplash.com/900x700/?children,painting,school,art-class",
+    "https://source.unsplash.com/900x700/?school,festival,children,celebration"
   ],
   parents: [
     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80",

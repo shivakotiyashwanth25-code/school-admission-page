@@ -73,7 +73,7 @@ const features = [
 ];
 
 const gallery = [
-  ["Annual Day", images.gallery[0]],
+  ["Annual Day Stage Event", images.gallery[0]],
   ["Sports Day", images.gallery[1]],
   ["Art Activities", images.gallery[2]],
   ["Festival Celebrations", images.gallery[3]]
