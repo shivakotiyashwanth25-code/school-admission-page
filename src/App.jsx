@@ -11,7 +11,6 @@ import {
   Clock,
   GraduationCap,
   HeartHandshake,
-  Home,
   Mail,
   MapPin,
   Menu,
@@ -23,7 +22,6 @@ import {
   Star,
   Sun,
   Users,
-  Utensils,
   X
 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -32,34 +30,36 @@ import GoogleAuthButton from "./components/GoogleAuthButton";
 
 const navLinks = ["Home", "Programs", "About", "Gallery", "Contact"];
 
+const schoolName = "Little Scholars Academy";
+
 const programs = [
   {
     title: "Play Group",
     age: "Age 1.8 - 2.5 years",
     icon: Sparkles,
     color: "bg-coral",
-    text: "Gentle first-school experiences through music, movement, stories, and sensory play."
+    text: "A warm transition from home to school with language-rich play, music, movement, and sensory discovery."
   },
   {
     title: "Nursery",
     age: "Age 2.5 - 3.5 years",
     icon: BookOpen,
     color: "bg-skybrand",
-    text: "Language, numbers, social confidence, and practical life skills in a warm classroom."
+    text: "Structured early learning that builds vocabulary, number sense, social confidence, and classroom routines."
   },
   {
     title: "Kindergarten",
     age: "Age 3.5 - 5.5 years",
     icon: GraduationCap,
     color: "bg-plum",
-    text: "School readiness with phonics, early math, projects, art, and guided discovery."
+    text: "Phonics, early numeracy, project work, storytelling, and school readiness with individual attention."
   },
   {
     title: "Daycare",
     age: "Age 1.8 - 8 years",
     icon: HeartHandshake,
     color: "bg-mint",
-    text: "Flexible daycare with meals, rest time, supervised play, and daily parent updates."
+    text: "Full-day care with nutritious meals, rest time, supervised play, homework support, and parent updates."
   }
 ];
 
@@ -97,6 +97,13 @@ const testimonials = [
   }
 ];
 
+const admissionSteps = [
+  ["1", "Submit Enquiry", "Share parent and child details through the booking form."],
+  ["2", "Campus Visit", "Meet our admission counsellor and explore classrooms, play areas, and safety systems."],
+  ["3", "Demo Class", "Let your child experience a friendly class with our early-years teachers."],
+  ["4", "Confirm Seat", "Complete documents and fee formalities after counsellor guidance."]
+];
+
 const faqs = [
   ["What is the admission process?", "Fill the enquiry form, schedule a campus visit, attend a short interaction, and complete the admission formalities."],
   ["How can I know the fee structure?", "The counsellor shares the latest fee details during your visit or demo class booking call."],
@@ -124,8 +131,8 @@ function Navbar({ darkMode, setDarkMode }) {
             <GraduationCap size={28} />
           </span>
           <span className="text-left">
-            <span className="block font-display text-lg font-black text-slate-950 dark:text-white">FirstSteps</span>
-            <span className="block text-xs font-semibold text-slate-500 dark:text-slate-300">Preschool & Daycare</span>
+            <span className="block font-display text-lg font-black text-slate-950 dark:text-white">{schoolName}</span>
+            <span className="block text-xs font-semibold text-slate-500 dark:text-slate-300">Preschool | Daycare | Kindergarten</span>
           </span>
         </button>
 
@@ -154,7 +161,7 @@ function Navbar({ darkMode, setDarkMode }) {
             onClick={() => scrollToId("booking")}
             className="rounded-full bg-gradient-to-r from-coral to-plum px-5 py-3 text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 hover:shadow-soft focus-ring"
           >
-            Admission Open
+            Apply Now
           </button>
         </div>
 
@@ -199,21 +206,21 @@ function Navbar({ darkMode, setDarkMode }) {
 
 function Hero() {
   return (
-    <section id="home" className="overflow-hidden bg-[radial-gradient(circle_at_top_left,#fff2a8,transparent_32%),linear-gradient(135deg,#fff8ed_0%,#e8f9ff_48%,#fff0f4_100%)] pt-32 dark:bg-[linear-gradient(135deg,#111827,#172033)]">
+    <section id="home" className="overflow-hidden bg-[radial-gradient(circle_at_top_left,#fff2a8,transparent_30%),linear-gradient(135deg,#fff8ed_0%,#eaf7ff_48%,#fff2f5_100%)] pt-32 dark:bg-[linear-gradient(135deg,#111827,#172033)]">
       <div className="section-shell grid min-h-[calc(100vh-3rem)] items-center gap-10 pb-16 lg:grid-cols-[1fr_0.9fr]">
         <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
           <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-coral shadow-md dark:bg-slate-900">
-            <CalendarCheck size={17} /> New session starts June 2026
+            <CalendarCheck size={17} /> Admissions Open for Academic Year 2026-27
           </span>
           <h1 className="mt-6 max-w-3xl font-display text-5xl font-black leading-tight text-slate-950 sm:text-6xl lg:text-7xl dark:text-white">
             Admissions Open 2026
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl dark:text-slate-200">
-            Give your child the perfect learning environment.
+            Give your child a safe, joyful, and academically strong start with caring teachers, modern classrooms, and activity-based learning.
           </p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <button onClick={() => scrollToId("booking")} className="rounded-full bg-coral px-7 py-4 font-bold text-white shadow-lg transition hover:-translate-y-1 hover:bg-plum focus-ring">
-              Book Demo Class
+              Book a Campus Visit
             </button>
             <button onClick={() => scrollToId("Programs")} className="rounded-full bg-white px-7 py-4 font-bold text-slate-900 shadow-lg transition hover:-translate-y-1 focus-ring dark:bg-slate-900 dark:text-white">
               Explore Programs
@@ -221,9 +228,9 @@ function Hero() {
           </div>
           <div className="mt-10 grid max-w-xl grid-cols-3 gap-3">
             {[
-              ["800+", "Happy Parents"],
-              ["18+", "Years Trust"],
-              ["6:1", "Child Ratio"]
+              ["900+", "Students Nurtured"],
+              ["15+", "Years of Trust"],
+              ["8:1", "Student Teacher Ratio"]
             ].map(([value, label]) => (
               <div key={label} className="rounded-3xl bg-white/80 p-4 text-center shadow-md backdrop-blur dark:bg-slate-900/70">
                 <strong className="block text-2xl text-slate-950 dark:text-white">{value}</strong>
@@ -234,12 +241,12 @@ function Hero() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.1 }} className="relative">
-          <div className="absolute -left-4 top-6 rounded-3xl bg-white px-4 py-3 font-bold text-mint shadow-soft dark:bg-slate-900">
-            <ShieldCheck className="inline" size={20} /> Safe Campus
+          <div className="absolute -left-4 top-6 z-10 rounded-3xl bg-white px-4 py-3 font-bold text-mint shadow-soft dark:bg-slate-900">
+            <ShieldCheck className="inline" size={20} /> Verified Safe Campus
           </div>
-          <img src={images.hero} alt="Happy children learning in a bright classroom" className="h-[360px] w-full rounded-[2rem] object-cover shadow-soft sm:h-[480px]" />
+          <img src={images.hero} alt="Teacher helping young children in a real classroom" className="h-[360px] w-full rounded-[2rem] object-cover shadow-soft sm:h-[480px]" />
           <div className="absolute -bottom-6 right-4 rounded-3xl bg-sunshine px-5 py-4 font-black text-slate-950 shadow-soft">
-            Limited Seats
+            Limited Seats for 2026
           </div>
         </motion.div>
       </div>
@@ -251,7 +258,7 @@ function Programs() {
   return (
     <section id="programs" className="bg-white py-20 dark:bg-slate-950">
       <div className="section-shell">
-        <SectionTitle eyebrow="Programs" title="Age-wise learning paths" text="A nurturing program for every early childhood milestone." />
+        <SectionTitle eyebrow="Programs" title="Admission programs for every early learner" text="Choose the right program based on your child's age, routine, and learning readiness." />
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {programs.map((program) => {
             const Icon = program.icon;
@@ -263,12 +270,33 @@ function Programs() {
                 <h3 className="mt-5 text-xl font-black">{program.title}</h3>
                 <p className="mt-2 text-sm font-bold text-coral">{program.age}</p>
                 <p className="mt-4 min-h-24 text-sm leading-6 text-slate-600 dark:text-slate-300">{program.text}</p>
-                <button className="mt-5 rounded-full bg-slate-100 px-5 py-3 text-sm font-bold transition hover:bg-skybrand hover:text-white dark:bg-slate-800">
-                  Learn More
+                <button onClick={() => scrollToId("booking")} className="mt-5 rounded-full bg-slate-100 px-5 py-3 text-sm font-bold transition hover:bg-skybrand hover:text-white dark:bg-slate-800">
+                  Enquire Now
                 </button>
               </motion.article>
             );
           })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function AdmissionProcess() {
+  return (
+    <section className="bg-[#fffaf0] py-20 dark:bg-slate-900">
+      <div className="section-shell">
+        <SectionTitle eyebrow="Admission Process" title="Simple, transparent, parent-friendly" text="From first enquiry to confirmed seat, our counsellor guides you at every step." />
+        <div className="mt-10 grid gap-5 md:grid-cols-4">
+          {admissionSteps.map(([number, title, text]) => (
+            <div key={title} className="rounded-3xl border border-slate-100 bg-white p-6 shadow-md dark:border-slate-800 dark:bg-slate-950">
+              <span className="grid size-12 place-items-center rounded-2xl bg-slate-950 text-lg font-black text-white dark:bg-sunshine dark:text-slate-950">
+                {number}
+              </span>
+              <h3 className="mt-5 text-lg font-black">{title}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">{text}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -289,19 +317,28 @@ function WhyChooseUs() {
   return (
     <section id="about" className="bg-[#f4fbff] py-20 dark:bg-slate-900">
       <div className="section-shell">
-        <SectionTitle eyebrow="Why choose us" title="Care parents can see and children can feel" text="Safety, joyful learning, and daily communication come together in every classroom." />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map(([label, Icon], index) => (
-            <div key={label} className="rounded-3xl bg-white p-6 shadow-md transition hover:-translate-y-1 hover:shadow-soft dark:bg-slate-950">
-              <span className={`grid size-12 place-items-center rounded-2xl text-white ${["bg-coral", "bg-skybrand", "bg-mint", "bg-plum", "bg-sunshine", "bg-slate-900 dark:bg-slate-700"][index]}`}>
-                <Icon size={24} />
-              </span>
-              <h3 className="mt-4 text-lg font-black">{label}</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
-                Thoughtfully designed routines, spaces, and staff practices that support confident early learning.
-              </p>
-            </div>
-          ))}
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.18em] text-coral">Why choose us</p>
+            <h2 className="mt-3 text-3xl font-black text-slate-950 sm:text-4xl dark:text-white">A campus built for safety, confidence, and everyday learning</h2>
+            <p className="mt-5 leading-8 text-slate-600 dark:text-slate-300">
+              Parents choose {schoolName} for our trained teachers, secure campus, balanced routine, and regular communication. Children get real classrooms, play areas, activity labs, and a caring team that knows them by name.
+            </p>
+            <img src={images.campus} alt="Bright school corridor and classroom area" className="mt-8 h-72 w-full rounded-[2rem] object-cover shadow-soft" />
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2">
+            {features.map(([label, Icon], index) => (
+              <div key={label} className="rounded-3xl bg-white p-6 shadow-md transition hover:-translate-y-1 hover:shadow-soft dark:bg-slate-950">
+                <span className={`grid size-12 place-items-center rounded-2xl text-white ${["bg-coral", "bg-skybrand", "bg-mint", "bg-plum", "bg-sunshine", "bg-slate-900 dark:bg-slate-700"][index]}`}>
+                  <Icon size={24} />
+                </span>
+                <h3 className="mt-4 text-lg font-black">{label}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                  Professional systems and caring routines that help children feel settled, safe, and ready to learn.
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -312,7 +349,7 @@ function Gallery() {
   return (
     <section id="gallery" className="bg-white py-20 dark:bg-slate-950">
       <div className="section-shell">
-        <SectionTitle eyebrow="Gallery" title="Little moments, big memories" text="A preview of celebrations, creative work, and active school days." />
+        <SectionTitle eyebrow="Campus Gallery" title="A real school day at a glance" text="Classroom learning, group activities, creative projects, and celebrations from our early-years program." />
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {gallery.map(([label, src]) => (
             <figure key={label} className="group relative h-72 overflow-hidden rounded-3xl shadow-lg">
@@ -340,7 +377,7 @@ function Testimonials() {
   return (
     <section className="bg-[#fff7dd] py-20 dark:bg-slate-900">
       <div className="section-shell">
-        <SectionTitle eyebrow="Testimonials" title="Parent reviews" text="Families choose us for warmth, communication, and visible growth." />
+        <SectionTitle eyebrow="Parent Testimonials" title="Trusted by families year after year" text="Parents value our communication, safety standards, and visible learning progress." />
         <div className="mx-auto mt-10 max-w-3xl rounded-[2rem] bg-white p-6 text-center shadow-soft dark:bg-slate-950 sm:p-10">
           <img src={current.image} alt={current.name} className="mx-auto size-20 rounded-full object-cover ring-4 ring-sunshine" />
           <div className="mt-5 flex justify-center gap-1 text-sunshine">
@@ -370,7 +407,7 @@ function OfferBanner() {
       <div className="section-shell">
         <div className="flex flex-col items-start justify-between gap-6 rounded-[2rem] bg-gradient-to-r from-coral via-plum to-skybrand p-8 text-white shadow-soft md:flex-row md:items-center">
           <div>
-            <p className="font-bold uppercase tracking-[0.18em] text-white/80">Admission Offer</p>
+            <p className="font-bold uppercase tracking-[0.18em] text-white/80">Admissions 2026-27</p>
             <h2 className="mt-2 text-3xl font-black">Limited Seats Available - Enroll Today!</h2>
           </div>
           <button onClick={() => scrollToId("booking")} className="rounded-full bg-white px-7 py-4 font-black text-plum transition hover:-translate-y-1 focus-ring">
@@ -414,14 +451,14 @@ function BookingForm() {
     <section id="booking" className="bg-[#eefdf9] py-20 dark:bg-slate-900">
       <div className="section-shell grid gap-10 lg:grid-cols-[0.8fr_1fr] lg:items-start">
         <div>
-          <p className="text-sm font-black uppercase tracking-[0.18em] text-coral">Book a demo</p>
-          <h2 className="mt-3 text-4xl font-black text-slate-950 dark:text-white">Visit our happy campus</h2>
+          <p className="text-sm font-black uppercase tracking-[0.18em] text-coral">Admission Enquiry</p>
+          <h2 className="mt-3 text-4xl font-black text-slate-950 dark:text-white">Book a campus visit or demo class</h2>
           <p className="mt-5 leading-8 text-slate-600 dark:text-slate-300">
-            Share your details and our admission counsellor will call you to confirm the demo class or school visit.
+            Share your details and our admission counsellor will call you to confirm the visit, explain fees, and help you choose the right program.
           </p>
           <div className="mt-8 space-y-4">
             <InfoLine icon={Phone} text="+91 98765 43210" />
-            <InfoLine icon={Mail} text="admissions@firststeps.edu" />
+            <InfoLine icon={Mail} text="admissions@littlescholars.edu" />
             <InfoLine icon={Clock} text="Mon-Sat, 9:00 AM - 6:30 PM" />
           </div>
         </div>
@@ -429,7 +466,7 @@ function BookingForm() {
         <form onSubmit={submit} className="rounded-[2rem] bg-white p-6 shadow-soft dark:bg-slate-950 sm:p-8" noValidate>
           {success && (
             <div className="mb-5 flex items-center gap-3 rounded-2xl bg-mint/10 p-4 font-bold text-mint">
-              <CheckCircle2 /> Thank you! Your demo class request has been submitted.
+              <CheckCircle2 /> Thank you! Our admission counsellor will contact you shortly.
             </div>
           )}
           <div className="grid gap-5 sm:grid-cols-2">
@@ -461,7 +498,7 @@ function BookingForm() {
             </Field>
           </div>
           <button className="mt-6 w-full rounded-full bg-gradient-to-r from-coral to-plum px-7 py-4 font-black text-white shadow-lg transition hover:-translate-y-1 focus-ring">
-            Submit Booking Request
+            Submit Admission Enquiry
           </button>
         </form>
       </div>
@@ -521,10 +558,10 @@ function Footer() {
             <span className="grid size-12 place-items-center rounded-2xl bg-gradient-to-br from-sunshine to-coral">
               <GraduationCap />
             </span>
-            <span className="text-xl font-black">FirstSteps Academy</span>
+            <span className="text-xl font-black">{schoolName}</span>
           </div>
           <p className="mt-5 max-w-md leading-7 text-slate-300">
-            A bright preschool and daycare for curious children, confident parents, and joyful first learning years.
+            A trusted preschool, daycare, and kindergarten focused on safe care, joyful learning, and confident school readiness.
           </p>
         </div>
         <div>
@@ -542,7 +579,7 @@ function Footer() {
           <div className="mt-4 space-y-3 text-sm text-slate-300">
             <p className="flex gap-2"><MapPin size={18} /> 21 Rainbow Lane, Pune</p>
             <p className="flex gap-2"><Phone size={18} /> +91 98765 43210</p>
-            <p className="flex gap-2"><Mail size={18} /> admissions@firststeps.edu</p>
+            <p className="flex gap-2"><Mail size={18} /> admissions@littlescholars.edu</p>
           </div>
           <div className="mt-5 flex gap-3">
             {["f", "in", "ig"].map((social) => (
@@ -554,7 +591,7 @@ function Footer() {
         </div>
       </div>
       <div className="section-shell mt-10 border-t border-white/10 pt-6 text-center text-sm text-slate-400">
-        Copyright 2026 FirstSteps Academy. All rights reserved.
+        Copyright 2026 {schoolName}. All rights reserved.
       </div>
     </footer>
   );
@@ -597,6 +634,7 @@ export default function App() {
       <main>
         <Hero />
         <Programs />
+        <AdmissionProcess />
         <WhyChooseUs />
         <Gallery />
         <Testimonials />
