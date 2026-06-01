@@ -27,6 +27,7 @@ import {
 import { motion } from "framer-motion";
 import { images } from "./assets/imageUrls";
 import GoogleAuthButton from "./components/GoogleAuthButton";
+import { isEmailConfigured, sendVisitConfirmation } from "./services/email";
 
 const navLinks = ["Home", "Programs", "About", "Gallery", "Contact"];
 
@@ -423,14 +424,17 @@ function BookingForm() {
   const [form, setForm] = useState({ parent: "", child: "", age: "", phone: "", email: "", date: "", program: "" });
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState(false);
+  const [emailNotice, setEmailNotice] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const update = (field, value) => {
     setForm((current) => ({ ...current, [field]: value }));
     setErrors((current) => ({ ...current, [field]: "" }));
     setSuccess(false);
+    setEmailNotice("");
   };
 
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault();
     const nextErrors = {};
     if (!form.parent.trim()) nextErrors.parent = "Parent name is required";
@@ -442,8 +446,25 @@ function BookingForm() {
     if (!form.program) nextErrors.program = "Select a program";
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length === 0) {
-      setSuccess(true);
-      setForm({ parent: "", child: "", age: "", phone: "", email: "", date: "", program: "" });
+      setIsSubmitting(true);
+      setEmailNotice("");
+
+      try {
+        if (isEmailConfigured) {
+          await sendVisitConfirmation(form);
+          setEmailNotice("Confirmation email sent to the parent.");
+        } else {
+          setEmailNotice("Booking saved on screen. Configure EmailJS to send confirmation emails.");
+        }
+
+        setSuccess(true);
+        setForm({ parent: "", child: "", age: "", phone: "", email: "", date: "", program: "" });
+      } catch (error) {
+        setSuccess(false);
+        setEmailNotice("Booking details are valid, but the confirmation email could not be sent. Please check EmailJS settings.");
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -467,6 +488,11 @@ function BookingForm() {
           {success && (
             <div className="mb-5 flex items-center gap-3 rounded-2xl bg-mint/10 p-4 font-bold text-mint">
               <CheckCircle2 /> Thank you! Our admission counsellor will contact you shortly.
+            </div>
+          )}
+          {emailNotice && (
+            <div className={`mb-5 rounded-2xl p-4 text-sm font-bold ${success ? "bg-skybrand/10 text-skybrand" : "bg-coral/10 text-coral"}`}>
+              {emailNotice}
             </div>
           )}
           <div className="grid gap-5 sm:grid-cols-2">
@@ -497,8 +523,8 @@ function BookingForm() {
               </select>
             </Field>
           </div>
-          <button className="mt-6 w-full rounded-full bg-gradient-to-r from-coral to-plum px-7 py-4 font-black text-white shadow-lg transition hover:-translate-y-1 focus-ring">
-            Submit Admission Enquiry
+          <button disabled={isSubmitting} className="mt-6 w-full rounded-full bg-gradient-to-r from-coral to-plum px-7 py-4 font-black text-white shadow-lg transition hover:-translate-y-1 disabled:cursor-not-allowed disabled:opacity-70 focus-ring">
+            {isSubmitting ? "Sending Confirmation..." : "Submit Admission Enquiry"}
           </button>
         </form>
       </div>
