@@ -609,7 +609,7 @@ function FloatingActions() {
 
   return (
     <>
-      <a href="https://wa.me/919876543210" className="fixed bottom-5 left-5 z-40 rounded-full bg-[#25D366] px-5 py-3 font-black text-white shadow-soft transition hover:-translate-y-1">
+      <a href="https://wa.me/917780144139" className="fixed bottom-5 left-5 z-40 rounded-full bg-[#25D366] px-5 py-3 font-black text-white shadow-soft transition hover:-translate-y-1">
         WhatsApp
       </a>
       {visible && (
