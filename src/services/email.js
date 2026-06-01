@@ -1,9 +1,9 @@
 import emailjs from "@emailjs/browser";
 
 const emailConfig = {
-  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
-  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_386nfm2",
+  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_926278c",
+  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "GkaMGJxfRUx4f-s3-"
 };
 
 export const isEmailConfigured = Object.values(emailConfig).every(Boolean);
