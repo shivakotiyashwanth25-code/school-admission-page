@@ -28,6 +28,7 @@ import { motion } from "framer-motion";
 import { images } from "./assets/imageUrls";
 import GoogleAuthButton from "./components/GoogleAuthButton";
 import { isEmailConfigured, sendVisitConfirmation } from "./services/email";
+import { subscribeToAuth } from "./services/firebase";
 
 const navLinks = ["Home", "Programs", "About", "Gallery", "Contact"];
 
@@ -426,6 +427,11 @@ function BookingForm() {
   const [success, setSuccess] = useState(false);
   const [emailNotice, setEmailNotice] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [signedInParent, setSignedInParent] = useState(null);
+
+  useEffect(() => subscribeToAuth(setSignedInParent), []);
+
+  const parentEmail = signedInParent?.email || form.email;
 
   const update = (field, value) => {
     setForm((current) => ({ ...current, [field]: value }));
@@ -441,7 +447,7 @@ function BookingForm() {
     if (!form.child.trim()) nextErrors.child = "Child name is required";
     if (!form.age || Number(form.age) < 1) nextErrors.age = "Enter a valid age";
     if (!/^[6-9]\d{9}$/.test(form.phone)) nextErrors.phone = "Enter a valid 10-digit phone number";
-    if (!/^\S+@\S+\.\S+$/.test(form.email)) nextErrors.email = "Enter a valid email";
+    if (!/^\S+@\S+\.\S+$/.test(parentEmail)) nextErrors.email = signedInParent ? "Your Google account email is missing" : "Enter a valid email";
     if (!form.date) nextErrors.date = "Choose a preferred date";
     if (!form.program) nextErrors.program = "Select a program";
     setErrors(nextErrors);
@@ -451,8 +457,8 @@ function BookingForm() {
 
       try {
         if (isEmailConfigured) {
-          await sendVisitConfirmation(form);
-          setEmailNotice("Confirmation email sent to the parent.");
+          await sendVisitConfirmation({ ...form, email: parentEmail });
+          setEmailNotice(`Confirmation email sent to ${parentEmail}.`);
         } else {
           setEmailNotice("Booking saved on screen. Configure EmailJS to send confirmation emails.");
         }
@@ -508,8 +514,15 @@ function BookingForm() {
             <Field label="Phone Number" error={errors.phone}>
               <input className={inputClass} value={form.phone} onChange={(e) => update("phone", e.target.value)} placeholder="10-digit mobile" />
             </Field>
-            <Field label="Email" error={errors.email}>
-              <input className={inputClass} type="email" value={form.email} onChange={(e) => update("email", e.target.value)} placeholder="you@example.com" />
+            <Field label={signedInParent ? "Google Email" : "Email"} error={errors.email}>
+              <input
+                className={`${inputClass} ${signedInParent ? "bg-slate-100 text-slate-500 dark:bg-slate-800" : ""}`}
+                type="email"
+                value={parentEmail}
+                onChange={(e) => update("email", e.target.value)}
+                placeholder={signedInParent ? "Google email will appear here" : "you@example.com"}
+                readOnly={Boolean(signedInParent)}
+              />
             </Field>
             <Field label="Preferred Date" error={errors.date}>
               <input className={inputClass} type="date" value={form.date} onChange={(e) => update("date", e.target.value)} />
